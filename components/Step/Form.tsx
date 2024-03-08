@@ -17,20 +17,30 @@ import { Input } from "@/components/ui/input";
 
 import { Checkbox } from "@/components/ui/checkbox"
 
+import * as bip39 from "bip39"
+
 const formSchema = z.object({
-    fid: z.number(),
-    phrase: z.string().optional(),
+    fid: z.coerce.number(),
+    phrase: z.string().refine(val => {
+        return bip39.validateMnemonic(val)
+    }, { message: "Invalid Mnemonic" }).optional(),
 });
 
-const FormComponent = ({ isPhrase, setIsPhrase, setFid }: { isPhrase: Boolean, setIsPhrase: Dispatch<SetStateAction<Boolean>>, setFid: Dispatch<SetStateAction<Number>> }) => {
+const FormComponent = ({ isPhrase, setIsPhrase, setFid, setStep, setPhrase }: { isPhrase: Boolean, setIsPhrase: Dispatch<SetStateAction<Boolean>>, setFid: Dispatch<SetStateAction<Number>>, setStep: Dispatch<SetStateAction<number>>, setPhrase: Dispatch<SetStateAction<string>> }) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
     });
 
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>) {
-
-        console.log(values);
+        setFid(values.fid);
+        if (!isPhrase) {
+            const account = bip39.generateMnemonic(256)
+            setPhrase(account)
+        } else {
+            values.phrase && setPhrase(values.phrase)
+        }
+        setStep(2)
     }
     return (
         <div className="border-2 p-8 rounded-md">
