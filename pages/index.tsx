@@ -1,17 +1,24 @@
-
+import Navbar from "@/components/Navbar";
+import FormComponent from "@/components/Step/Form";
+import Initial from "@/components/Step/Initial";
 import { Inter } from "next/font/google";
+import { useState } from "react";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export default function Home() {
+  const [step, setStep] = useState(0);
+  const [fid, setFid] = useState<Number>(0);
+  const [isPhrase, setIsPhrase] = useState<Boolean>(false);
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-center p-24 ${inter.variable}`}
-    >
-      <h1 className="text-4xl font-bold">Farcaster Recover</h1>
-      <div className="flex flex-row items-center justify-evenly">
-
-      </div>
-    </main>
+    <div>
+      <Navbar />
+      <main
+        className={`flex flex-col items-center justify-center p-24 ${inter.variable}`}
+      >
+        {step == 0 && <Initial setStep={setStep} />}
+        {step == 1 && <FormComponent isPhrase={isPhrase} setIsPhrase={setIsPhrase} setFid={setFid} />}
+      </main>
+    </div>
   );
 }

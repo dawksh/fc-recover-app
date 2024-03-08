@@ -16,7 +16,6 @@ import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
-import Navbar from "@/components/Navbar";
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -36,7 +35,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider theme={{ darkMode: darkTheme(), lightMode: lightTheme() }}>
-            <Navbar />
             <Component {...pageProps} />
           </RainbowKitProvider>
         </QueryClientProvider>
