@@ -3,6 +3,7 @@ import FormComponent from "@/components/Step/Form";
 import Initial from "@/components/Step/Initial";
 import Signing from "@/components/Step/Signing";
 import { Inter } from "next/font/google";
+import Head from "next/head";
 import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -22,6 +23,9 @@ export default function Home() {
 
   return (
     <div>
+      <Head>
+        <title>Farcaster Recovery</title>
+      </Head>
       <Navbar />
       <main
         className={`flex flex-col items-center justify-center p-24 ${inter.variable}`}
