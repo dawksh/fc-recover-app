@@ -16,6 +16,7 @@ import {
   QueryClientProvider,
   QueryClient,
 } from "@tanstack/react-query";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function App({ Component, pageProps }: AppProps) {
 
@@ -36,6 +37,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider theme={{ darkMode: darkTheme(), lightMode: lightTheme() }}>
             <Component {...pageProps} />
+            <Toaster />
           </RainbowKitProvider>
         </QueryClientProvider>
       </WagmiProvider>

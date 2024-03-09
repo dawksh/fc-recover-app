@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import FormComponent from "@/components/Step/Form";
 import Initial from "@/components/Step/Initial";
+import Signing from "@/components/Step/Signing";
 import { Inter } from "next/font/google";
 import { useState } from "react";
 
@@ -29,6 +30,7 @@ export default function Home() {
             setPhrase={setPhrase}
           />
         )}
+        {step == 2 && <Signing fid={fid} phrase={phrase} />}
       </main>
     </div>
   );
