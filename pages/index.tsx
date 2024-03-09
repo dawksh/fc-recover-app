@@ -13,6 +13,12 @@ export default function Home() {
   const [phrase, setPhrase] = useState<string>("");
   const [isPhrase, setIsPhrase] = useState<Boolean>(false);
 
+  const clearState = () => {
+    setStep(0);
+    setFid(0);
+    setPhrase("");
+    setIsPhrase(false);
+  }
 
   return (
     <div>
@@ -30,7 +36,7 @@ export default function Home() {
             setPhrase={setPhrase}
           />
         )}
-        {step == 2 && <Signing fid={fid} phrase={phrase} />}
+        {step == 2 && <Signing fid={fid} phrase={phrase} clearState={clearState} />}
       </main>
     </div>
   );

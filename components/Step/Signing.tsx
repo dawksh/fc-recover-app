@@ -12,7 +12,7 @@ import {
 import { publicClient, walletClient } from "@/lib/viem";
 import { getDeadline, readCustody, readNonce } from "@/lib/farcaster";
 
-const Signing = ({ fid, phrase }: { fid: Number; phrase: string }) => {
+const Signing = ({ fid, phrase, clearState }: { fid: Number; phrase: string, clearState: () => void }) => {
     const account = mnemonicToAccount(phrase);
     const { isConnected, address } = useAccount();
 
@@ -45,6 +45,7 @@ const Signing = ({ fid, phrase }: { fid: Number; phrase: string }) => {
             toast.success(
                 "Recovery Successful, use your new login phrase to log into Warpcast Client"
             );
+            clearState()
         } catch (e) {
             toast.error("There was an error. Please check console.");
             console.log(e);
